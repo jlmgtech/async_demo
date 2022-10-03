@@ -3,19 +3,18 @@ from EventLoop import EventLoop
 def loadThing():
     global loop
     print("loading thing")
-    loop.setTimeout(procThing, 1000)
+    loop.setTimeout(procThing, 2000)
 
 def procThing():
     global loop
     print("thing loaded")
-    loop.setTimeout(lambda: print("thing processed"), 1000)
+    loop.setTimeout(finished, 2000)
     
+def finished():
+    print("finished")
 
 loop = EventLoop()
-loop.setTimeout(lambda: print("hello after 5 seconds"), 5000)
-loop.setTimeout(lambda: print("hello after 1 seconds"), 1000)
-loop.setTimeout(procThing, 0)
+loop.setTimeout(loadThing, 0)
 loop.run()
 
 print("done!")
-
