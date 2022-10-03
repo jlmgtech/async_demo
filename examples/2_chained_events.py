@@ -16,5 +16,4 @@ def finished():
 loop = EventLoop()
 loop.setTimeout(loadThing, 0)
 loop.run()
-
 print("done!")
