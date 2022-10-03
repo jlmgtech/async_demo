@@ -50,3 +50,21 @@ class EventLoop():
             print(f"{CYAN}tick: {BLUE}{self.seconds}s{RESET}")
 
 
+class Promise():
+    def __init__(self):
+        self._callbacks = []
+        self._value = None
+        self._resolved = False
+
+    def then(self, callback):
+        self._callbacks.append(callback)
+        if self._resolved:
+            self.resolve(self._value)
+        return self
+
+    def resolve(self, value):
+        self._value = value
+        self._resolved = True
+        for callback in self._callbacks:
+            callback(value)
+
